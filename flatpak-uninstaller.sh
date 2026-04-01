@@ -1,15 +1,18 @@
  
-#!/bin/bash 
-# Script per cancellare tutte le applicazioni
+#!/bin/bash
 
+# Lista applicazioni Flatpak installate
 apps=$(flatpak list --app --columns=application)
 
-echo "Questa é la lista di applicazioni"
+echo "Lista applicazioni installate:"
 for app in $apps; do
-    echo "$app"
+    echo "- $app"
 done
 
+# Chiede all'utente quale rimuovere
+read -p "Quale applicazione vuoi rimuovere? " domanda
 
-echo "Quale vuoi cancellare ?" && read -e domanda
+# Rimozione applicazione
+flatpak remove "$domanda" -y
 
-flatpak remove $domanda -y 
+echo "Operazione completata"
